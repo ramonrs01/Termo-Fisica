@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termo Física</title>
+    <style>
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #473b3b;
+            color: #f2f2f2;
+            margin: 0;
+            flex-direction: column;
+        }
+        .tabuleiro {
+            display: grid;
+            grid-template-rows: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .linha {
+            display: grid;
+            grid-template-columns: repeat(5, 50px);
+            gap: 10px;
+        }
+        .casa {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #333;
+            background-color: #1e1e1e;
+            color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .correta {
+            background-color: #4caf50;
+            color: white;
+        }
+        .errada {
+            background-color: #616161;
+            color: white;
+        }
+        .deslocada {
+            background-color: #fbc02d;
+            color: black;
+        }
+        input {
+            font-family: 'Poppins', Arial, sans-serif;
+            font-size: 20px;
+
+            background-color: #1e1e1e;
+            color: #f2f2f2;
+        }
+        input::placeholder {
+            color: #aaaaaa;
+        }
+        button {
+            font-family: 'Poppins', Arial, sans-serif;  
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+        #mensagem {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Termo Física</h1>
+    <div id="mensagem"></div>
+    <div class="tabuleiro" id="tabuleiro"></div>
+    <input type="text" id="entradaPalavra" maxlength="5" placeholder="Digite sua palavra">
+    <button id="botaoEnviar">Enviar Palpite</button>
+    <script>
+        const palavras = ["atomo", "laser", "foton", "massa", "ondas","omega","vacuo","atico","troca","rotas","fraco","radar","litio","quark","litio","prata","calor","vetor","laser","molar","lumen","campo","forca","vibra","tesla","hertz","risco","fusao","nivel","sonda","faixa"];
+        const palavraSorteada = palavras[Math.floor(Math.random() * palavras.length)];
+        const tabuleiro = document.getElementById("tabuleiro");
+        const mensagem = document.getElementById("mensagem");
+        const entradaPalavra = document.getElementById("entradaPalavra");
+        const botaoEnviar = document.getElementById("botaoEnviar");
+        let tentativas = 0;
+
+        function criarTabuleiro() {
+            for (let i = 0; i < 5; i++) {
+                const linha = document.createElement("div");
+                linha.className = "linha";
+                for (let j = 0; j < 5; j++) {
+                    const casa = document.createElement("div");
+                    casa.className = "casa";
+                    casa.id = `casa-${i}-${j}`;
+                    linha.appendChild(casa);
+                }
+                tabuleiro.appendChild(linha);
+            }
+        }
+
+        function fazerPalpite() {
+            if (tentativas >= 5) {
+                mensagem.textContent = `Fim de jogo! A palavra correta era "${palavraSorteada}".`;
+                return;
+            }
+            const palpite = entradaPalavra.value.toLowerCase();
+            if (palpite.length !== 5) {
+                alert("A palavra deve ter 5 letras.");
+                return;
+            }
+
+            verificarPalpite(palpite);
+            entradaPalavra.value = '';
+            tentativas++;
+
+            if (palpite === palavraSorteada) {
+                mensagem.textContent = "Parabéns! Você acertou a palavra.";
+                botaoEnviar.disabled = true;
+            } else if (tentativas === 5) {
+                mensagem.textContent = `Fim de jogo! A palavra correta era "${palavraSorteada}".`;
+                botaoEnviar.disabled = true;
+            }
+        }
+
+        function verificarPalpite(palpite) {
+            for (let i = 0; i < 5; i++) {
+                const casa = document.getElementById(`casa-${tentativas}-${i}`);
+                casa.className = "casa";
+                if (palpite[i] === palavraSorteada[i]) {
+                    casa.classList.add("correta");
+                } else if (palavraSorteada.includes(palpite[i])) {
+                    casa.classList.add("deslocada");
+                } else {
+                    casa.classList.add("errada");
+                }
+                casa.textContent = palpite[i];
+            }
+        }
+
+        botaoEnviar.addEventListener("click", fazerPalpite);
+
+        criarTabuleiro();
+    </script>
+</body>
+</html>
