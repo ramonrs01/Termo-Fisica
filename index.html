@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termo Clone - Física</title>
+    <title>Térmico</title>
     <style>
         body {
             font-family: 'Poppins', Arial, sans-serif;
@@ -147,7 +147,7 @@
     <input type="text" id="entradaPalavra" maxlength="5" oninput="this.value = this.value.slice(0, 5)" placeholder="Digite sua palavra">
     <button id="botaoEnviar">Enviar Palpite</button>
     <script>
-        const palavras = ["foton"];
+        const palavras = ["atomo", "laser", "foton", "massa", "ondas", "campo", "vetor", "forca", "raios", "movel", "plano", "carga"];
         const palavraSorteada = palavras[Math.floor(Math.random() * palavras.length)];
         const tabuleiro = document.getElementById("tabuleiro");
         const mensagem = document.getElementById("mensagem");
