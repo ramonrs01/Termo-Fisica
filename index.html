@@ -144,10 +144,10 @@
     <h1>Térmico</h1>
     <div id="mensagem"></div>
     <div class="tabuleiro" id="tabuleiro"></div>
-    <input type="text" id="entradaPalavra" maxlength="5" placeholder="Digite sua palavra">
+    <input type="text" id="entradaPalavra" maxlength="5" oninput="this.value = this.value.slice(0, 5)" placeholder="Digite sua palavra">
     <button id="botaoEnviar">Enviar Palpite</button>
     <script>
-        const palavras = ["átomo", "laser", "fóton", "massa", "ondas"];
+        const palavras = ["atomo", "laser", "foton", "massa", "ondas", "campo", "vetor", "forca", "raios", "movel", "plano", "carga"];
         const palavraSorteada = palavras[Math.floor(Math.random() * palavras.length)];
         const tabuleiro = document.getElementById("tabuleiro");
         const mensagem = document.getElementById("mensagem");
