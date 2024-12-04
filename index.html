@@ -147,7 +147,7 @@
     <input type="text" id="entradaPalavra" maxlength="5" oninput="this.value = this.value.slice(0, 5)" placeholder="Digite sua palavra">
     <button id="botaoEnviar">Enviar Palpite</button>
     <script>
-        const palavras = ["atomo", "laser", "foton", "massa", "ondas", "campo", "vetor", "forca", "raios", "movel", "plano", "carga"];
+        const palavras = ["atomo", "laser", "foton", "massa", "ondas", "campo", "vetor", "forca", "raios", "movel", "plano", "carga", "cores","fontes"];
         const palavraSorteada = palavras[Math.floor(Math.random() * palavras.length)];
         const tabuleiro = document.getElementById("tabuleiro");
         const mensagem = document.getElementById("mensagem");
